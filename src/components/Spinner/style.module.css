@@ -1,0 +1,33 @@
+.wrapper-spinner{
+	position: absolute;
+	z-index: 20;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 7.5%;
+	left: 48%; 
+	
+}
+.spinner {
+	display: inline-block;
+	/* margin-top: 300px; */
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	animation: spin 1.2s linear infinite;
+}
+
+.spinner__gray {
+	border: 5px solid rgb(180, 180, 180);
+	border-left-color: #444444;
+}
+
+
+@keyframes spin {
+	0% {
+		transition: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

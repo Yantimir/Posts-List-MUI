@@ -1,0 +1,9 @@
+.a {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.a:hover {
+    color: #444444;
+}
