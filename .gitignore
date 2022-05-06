@@ -1,0 +1,17 @@
+# Dependency directories
+node_modules/
+.idea
+.vscode
+**.d.ts
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# dotenv environment variables file
+.env
+.env.test
