@@ -9,7 +9,7 @@ import { CurrentAllUsersContext } from "./context/CurrentAllUsersContext";
 import { Header } from "./components/Header";
 import { Search } from "./components/Search/Search";
 import Breadcrumbs from "./components/Breadcrumbs";
-import { HomePage } from "./pages/HomePage/HomePage";
+import { PostPage } from "./pages/PostPage/PostPage";
 import { PostDetailsPage } from "./pages/PostDetailsPage/PostDetailsPage";
 import { Footer } from "./components/Footer";
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
@@ -64,7 +64,7 @@ export const App = () => {
             })
     }, [delaySearchQuery]);
 
-    // поиск
+    // поиск по автору и по title
     const handleInputChange = (inputValue) => {
         setSearchQuery(inputValue);
     }
@@ -192,7 +192,7 @@ export const App = () => {
                                 <Box sx={{ flex: "1 0 auto" }}>
                                     <Routes>
                                         <Route path="/" element={
-                                            <HomePage
+                                            <PostPage
                                                 searchCount={posts.length}
                                                 searchText={searchQuery}
                                                 isLoading={isLoading} />}

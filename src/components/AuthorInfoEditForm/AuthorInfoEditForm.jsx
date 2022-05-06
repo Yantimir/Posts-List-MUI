@@ -42,7 +42,7 @@ export const AuthorInfoEditForm = ({ handleExpandClick }) => {
                 })}
                 label="Name"
                 variant="filled"
-                sx={{ m: 1, width: '100%', pl: "10px", pr: "10px"  }}
+                sx={{ m: 1, width: '100%', pl: "10px", pr: "10px" }}
                 size="small"
             />
             <Box>
@@ -61,23 +61,25 @@ export const AuthorInfoEditForm = ({ handleExpandClick }) => {
                 {errors?.about && <Box color="red" sx={{ textAlign: "center", fontSize: "10px" }}>{errors?.about?.message}</Box>}
             </Box>
             <Box sx={{ display: "flex" }}>
-                <Button
-                    size="small"
-                    variant="contained"
-                    // fullWidth={true}
-                    sx={{ width: '100%', m: 1 }}
-                    type="button"
-                    onClick={() => setTimeout(() => { handleExpandClick(); }, 200)}
-                >Отменить
-                </Button>
-                <ColorButton
-                    size="small"
-                    variant="contained"
-                    // fullWidth={true}
-                    sx={{ width: '100%', m: 1 }}
-                    type="submit"
-                >Отправить
-                </ColorButton>
+                <Box sx={{ m: 1 }}>
+                    <Button
+                        size="small"
+                        variant="contained"
+                        fullWidth={true}
+                        type="button"
+                        onClick={() => setTimeout(() => { handleExpandClick(); }, 400)}
+                    >Отменить
+                    </Button>
+                </Box>
+                <Box sx={{ m: 1 }}>
+                    <ColorButton
+                        size="small"
+                        variant="contained"
+                        fullWidth={true}
+                        type="submit"
+                    >Отправить
+                    </ColorButton>
+                </Box>
             </Box>
         </Box>
     );

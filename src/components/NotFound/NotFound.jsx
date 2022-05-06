@@ -7,7 +7,7 @@ export const NotFound = ({ children, title, buttonText, buttonAction }) => {
         <Container >
             <Box sx={{mt: 5,display: "flex", flexDirection: "column", alignItems: "center", justifyContent: " center"}}>
                 <Link href="/">
-                    <SentimentDissatisfiedOutlinedIcon aria-hidden="true"  sx={{width: "200px", height: "200px", mb: 3}}/>
+                    <SentimentDissatisfiedOutlinedIcon alt="" aria-hidden="true"  sx={{width: "200px", height: "200px", mb: 3}}/>
                 </Link>
                 <Typography sx={{mb: 3, fontSize: "30px"}}>
                     {title}

@@ -2,10 +2,10 @@ import React from 'react';
 import { AuthorSidebar } from '../../components/AuthorSidebar/AuthorSidebar';
 import { UsersListSidebar } from '../../components/UsersListSidebar/UsersListSidebar';
 import { SearchInfo } from '../../components/SearchInfo/SearchInfo';
-import { PostsList } from './../../components/PostsList/index';
+import { PostsList } from '../../components/PostsList/index';
 import { Box, Container, Grid, Paper } from '@mui/material';
 import { styled } from "@mui/material/styles";
-import LinearProgress from './../../components/LinearProgress/LinearProgress';
+import LinearProgress from '../../components/LinearProgress/LinearProgress';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#f7f7f7',
@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export const HomePage = ({ searchCount, searchText, isLoading }) => {
+export const PostPage = ({ searchCount, searchText, isLoading }) => {
 
     return (
         <Container>

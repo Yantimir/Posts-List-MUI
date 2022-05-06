@@ -84,7 +84,6 @@ export const AuthorSidebar = () => {
                         </Typography>
                     }
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                        {/* <MailOutlined fontSize="small" /> */}
                         <Typography
                             color="text.secondary"
                             sx={{ fontWeight: 600, fontSize: "12px" }}
@@ -94,7 +93,6 @@ export const AuthorSidebar = () => {
                     </Box>
 
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                        {/* <BusinessCenterOutlined fontSize="small" /> */}
                         <Typography
                             color="text.secondary"
                             sx={{ fontWeight: 600, fontSize: "12px" }}
@@ -114,7 +112,6 @@ export const AuthorSidebar = () => {
                 >
                     {!expanded &&
                         <Button
-                            // fullWidth={true}
                             sx={{ width: "100%"}}
                             variant="contained"
                             size="small"

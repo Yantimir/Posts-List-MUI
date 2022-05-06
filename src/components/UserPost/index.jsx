@@ -55,20 +55,17 @@ export const UserPost = ({ _id, likes, author, comments, text, title, image, tag
             <Box
                 sx={{
                     display: 'flex',
-                    flexWrap: 'wrap',
+                    // flexWrap: 'wrap',
                     '& > :not(style)': {
                         width: 600,
-                        height: "100%",
+                        // height: "100%",
                     },
                     mb: "50px",
                     justifyContent: "center"
                 }}
             >
-                <Paper elevation={1}>
-                    <Box sx={{
-                        // width: "270px",
-                        height: "100%",
-                    }}>
+                <Paper elevation={1} sx={{width: "20px"}}>
+                    <Box>
                         <Box>
                             <IconButton variant="contained" onClick={handleClickBack}>
                                 <ArrowBack />
