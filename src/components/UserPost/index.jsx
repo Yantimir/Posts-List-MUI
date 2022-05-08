@@ -64,7 +64,7 @@ export const UserPost = ({ _id, likes, author, comments, text, title, image, tag
                     justifyContent: "center"
                 }}
             >
-                <Paper elevation={1} sx={{width: "20px"}}>
+                {/*<Paper elevation={1} sx={{ width: "20px" }}>
                     <Box>
                         <Box>
                             <IconButton variant="contained" onClick={handleClickBack}>
@@ -77,7 +77,7 @@ export const UserPost = ({ _id, likes, author, comments, text, title, image, tag
                             </IconButton>
                         </Box>
                     </Box>
-                </Paper>
+                    </Paper>*/}
                 <Paper>
                     <Box sx={{ flex: "1 0 auto", mb: "15px", p: "20px" }}>
                         <Box component="div" sx={{ display: "flex", justifyContent: "space-between" }}>
