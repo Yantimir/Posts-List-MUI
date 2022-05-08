@@ -18,12 +18,12 @@ export const PostDetailsPage = () => {
     }, [postID, posts]);
 
     const { data: post, loading, error } = useApi(handlerData);
-    
+
     return (
         <>
             {loading && <LinearIndeterminate />}
             {error && <NotFound title="Пост не найден" buttonText="Назад" buttonAction={() => navigate(-1)} />}
-            {post && <UserPost {...post}/>}
+            {post && <UserPost {...post} />}
         </>
     );
 }; 

@@ -8,7 +8,7 @@ export const Tags = ({ tags }) => {
     return (
         <>
             {!!tagsValue
-                ? <Typography
+                && <Typography
                     sx={{ pl: 0, mb: 2 }}
                     paragraph
                     variant="caption"
@@ -28,14 +28,6 @@ export const Tags = ({ tags }) => {
                             {tag}
                         </Box>
                     )}
-                </Typography>
-                : <Typography
-                    sx={{ pl: 0, mb: 2 }}
-                    paragraph
-                    variant="caption"
-                    color="white"
-                >
-                    Tags: none
                 </Typography>
             }
         </>

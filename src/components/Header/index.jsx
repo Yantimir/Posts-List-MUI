@@ -3,7 +3,6 @@ import { CurrentUserContext } from './../../context/CurrentUserContext';
 import { AppBar, Toolbar, IconButton, Box, Typography, Avatar } from "@mui/material";
 import { Icon16Crown } from '@vkontakte/icons';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { Socials } from './../Socials/index';
 
 export const Header = ({ children }) => {
 

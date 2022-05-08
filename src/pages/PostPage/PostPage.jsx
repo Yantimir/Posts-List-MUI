@@ -6,6 +6,7 @@ import { PostsList } from '../../components/PostsList/index';
 import { Box, Container, Grid, Paper } from '@mui/material';
 import { styled } from "@mui/material/styles";
 import LinearProgress from '../../components/LinearProgress/LinearProgress';
+import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#f7f7f7',
@@ -33,6 +34,7 @@ export const PostPage = ({ searchCount, searchText, isLoading }) => {
                         : <Grid item xs={8}>
                             <Item sx={{ mb: 5, pt: 5 }}>
                                 <SearchInfo searchCount={searchCount} searchText={searchText} />
+                                <ButtonScrollTop />
                                 <PostsList />
                             </Item>
                         </Grid>}

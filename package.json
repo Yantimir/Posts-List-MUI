@@ -41,6 +41,7 @@
     "css-loader": "^6.6.0",
     "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^5.5.0",
+    "prettier": "2.6.2",
     "react-devtools": "^4.24.3",
     "rimraf": "^3.0.2",
     "sass-loader": "^12.6.0",

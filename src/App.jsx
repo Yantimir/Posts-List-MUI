@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "./utils/Api";
 import useDebounce from './hooks/useDebounce';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { AppContext } from './context/appContext';
 import { CurrentUserContext } from './context/CurrentUserContext';
 import { CurrentPostsContext } from "./context/CurrentPostsContext";
@@ -49,6 +49,8 @@ export const App = () => {
     const [allUsers, setAllUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         setIsLoading(true);
         Promise.all([api.getAllPosts(), api.getUserInfo(), api.getAllUsers()])
@@ -68,8 +70,9 @@ export const App = () => {
     const handleInputChange = (inputValue) => {
         setSearchQuery(inputValue);
     }
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
+    const handleFormSubmit = (inputValue) => {
+        setSearchQuery(inputValue);
+        navigate("/");
         handleRequest();
     }
     const handleRequest = (postsData) => {
@@ -83,6 +86,10 @@ export const App = () => {
             const filterPosts = postsData.filter(post => post?.author?.name.toLowerCase().includes(searchQuery.toLowerCase()));
             setPosts(prevState => filterPosts);
         }
+    }
+    // очистка поиска 
+    const clearSearch = () => {
+        setSearchQuery("");
     }
 
     // установка лайка
@@ -165,6 +172,7 @@ export const App = () => {
             <AppContext.Provider value={{
                 handleInputChange,
                 handleFormSubmit,
+                clearSearch,
                 handlePostLike,
                 handleDeletePost,
                 handleSendNewAvatar,
@@ -184,7 +192,7 @@ export const App = () => {
                                     flexDirection: "column",
                                 }}>
                                 <Header>
-                                    <Search />
+                                    <Search searchText={searchQuery}/>
                                 </Header>
                                 <Box sx={{ pl: "10px", mb: 1 }}>
                                     <Breadcrumbs />

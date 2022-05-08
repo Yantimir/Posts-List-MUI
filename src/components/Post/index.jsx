@@ -1,18 +1,22 @@
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import style from "./style.module.css";
+import dayjs from "dayjs"; // yarn add dayjs
+import "dayjs/locale/ru"
+dayjs.locale("ru");
+
 import { isLiked } from './../../utils/utils';
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { AppContext } from "../../context/appContext";
 import { Likes } from "../Likes/Likes";
 import { CommentsCount } from './../CommentsCount/CommentsCount';
 import { Tags } from "../Tags/Tags";
+import { AuthorEditPost } from "../AuthorEditPost/AuthorEditPost";
+
 import { Card, CardHeader, Avatar, CardMedia, CardContent, Typography, CardActions, Grid, Box } from "@mui/material";
 import { PanoramaFishEye } from '@mui/icons-material';
-import style from "./style.module.css";
-import dayjs from "dayjs"; // yarn add dayjs
-import "dayjs/locale/ru"
-import { AuthorEditPost } from "../AuthorEditPost/AuthorEditPost";
-dayjs.locale("ru");
+
+
 
 export const Post = ({_id ,image, likes, tags, comments, title, author, text, created_at, updated_at }) => {
 
