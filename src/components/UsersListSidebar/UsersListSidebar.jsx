@@ -34,7 +34,7 @@ export const UsersListSidebar = () => {
     };
 
     return (
-        <Box sx={{ pl: "5px", mb: "15px" }}>
+        <Box sx={{ mb: "15px" }}>
             <CardActions sx={{ marginTop: "auto" }} disableSpacing >
                 <Box sx={{ display: "flex" }}>
                     <GroupOutlined />
@@ -57,9 +57,9 @@ export const UsersListSidebar = () => {
                 </ExpandMoreStyle>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
+                <Box sx={{pl: "8px"}}>
                     <UsersList />
-                </CardContent>
+                </Box>
             </Collapse>
         </Box>
     );

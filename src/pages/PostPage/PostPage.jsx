@@ -34,8 +34,8 @@ export const PostPage = ({ searchCount, searchText, isLoading }) => {
                         : <Grid item xs={8}>
                             <Item sx={{ mb: 5, pt: 5 }}>
                                 <SearchInfo searchCount={searchCount} searchText={searchText} />
-                                <ButtonScrollTop />
                                 <PostsList />
+                                {/* <ButtonScrollTop /> */}
                             </Item>
                         </Grid>}
                 </Grid>

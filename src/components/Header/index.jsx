@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from './../../context/CurrentUserContext';
-import { AppBar, Toolbar, IconButton, Box, Typography, Avatar } from "@mui/material";
+import { AppBar, Toolbar, Box, Typography } from "@mui/material";
 import { Icon16Crown } from '@vkontakte/icons';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+
 
 export const Header = ({ children }) => {
 
@@ -21,28 +21,8 @@ export const Header = ({ children }) => {
                         </Typography>
                     </Toolbar>
                 </Box>
-
                 <Box sx={{ pr: "15px", display: "flex", alignItems: "center" }}>
-                    <Box sx={{ mr: "15px" }}>
-                        {children}
-                    </Box>
-                    <IconButton>
-                        {currentUser.avatar && currentUser.avatar === fakeAvatar
-                            ? <Avatar
-                                alt="avatar"
-                            >
-                                {letterAvatar}
-                            </Avatar>
-                            : <Avatar
-                                src={currentUser?.avatar}
-                                alt="avatar"
-                            >
-                                {!currentUser.avatar && currentUser.name}
-                            </Avatar>}
-                    </IconButton>
-                    <Box>
-                        <LogoutOutlinedIcon />
-                    </Box>
+                    {children}
                 </Box>
             </Box>
         </AppBar >

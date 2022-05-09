@@ -2,13 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Box, Button, Typography, TextField } from "@mui/material";
 
-export const RegistrationForm = () => {
+export const RegistrationForm = ({ titleForm, titleButton }) => {
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: "onBlur"
     });
 
-    function onSubmit(data) {
-        data
+    function handleRegistrationFormSubmit(data) {
+        console.log(data)
     }
 
     return (
@@ -16,18 +17,18 @@ export const RegistrationForm = () => {
             component="form"
             noValidate
             autoComplete="off"
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", maxWidth: "300px" }}
+            onSubmit={handleSubmit(handleRegistrationFormSubmit)}
+            sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "300px" }}
         >
-            <Typography>Введите данные</Typography>
+            <Typography>{titleForm}</Typography>
             <TextField
-                {...register("name", {
-                    required: "Это поле обязательно"
-                })}
-                id="name"
+                {...register(
+                    "name",
+                    { required: "Это поле обязательно" }
+                )}
                 label="Введите имя"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1, width: "100%" }}
                 size="small"
             />
             <Box component="div">
@@ -35,21 +36,22 @@ export const RegistrationForm = () => {
             </Box>
             <TextField
                 {...register("email")}
-                label="Введите ваш город"
+                label="Введите ваш email"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1, width: "100%" }}
                 size="small"
             />
             <TextField
-                {...register("password", {
+                {...register(
+                    "password", {
                     pattern: {
                         value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                        message: "Пароль должен содержать минимум 8 символов, одну букву латинского алфавита и одну цифру"
+                        message: "Пароль должен содержать минимум 8 символов, буквы латинского алфавита и цифры"
                     }
                 })}
                 label="Введите password"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1, width: "100%" }}
                 size="small"
             />
             <Box component="div">
@@ -58,8 +60,8 @@ export const RegistrationForm = () => {
             <Button
                 variant="contained"
                 type="submit"
-                sx={{ width: '300px', m: 1 }}
-            >Зарегестрироваться
+                sx={{ m: 1, width: "100%" }}
+            >{titleButton}
             </Button>
         </Box>
     );

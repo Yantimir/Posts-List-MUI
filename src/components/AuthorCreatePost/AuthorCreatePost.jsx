@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { AuthorCreatePostForm } from "../AuthorCreatePostForm/AuthorCreatePostForm";
 import Modal from "../Modal/Modal";
 import { styled } from '@mui/material/styles';

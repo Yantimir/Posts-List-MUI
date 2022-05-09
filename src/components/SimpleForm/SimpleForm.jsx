@@ -36,33 +36,35 @@ export const SimpleForm = ({ addContactsSimpleForm }) => {
         >
             <Typography>Введите данные</Typography>
             <TextField
+                value={contactInfo.name}
                 onChange={handleSimpleFormInputChange}
                 name="name"
                 label="Введите имя"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1 }}
                 size="small"
             />
             <TextField
+                value={contactInfo.lastname}
                 onChange={handleSimpleFormInputChange}
                 name="lastname"
                 label="Введите фамилию"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1 }}
                 size="small"
             />
             <TextField
+                value={contactInfo.phoneNumber}
                 onChange={handleSimpleFormInputChange}
                 name="phoneNumber"
                 label="Введите телефон"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1 }}
                 size="small"
             />
             <Button
                 variant="contained"
                 type="submit"
-                sx={{ width: '200px' }}
                 size="small"
             >Отправить
             </Button>

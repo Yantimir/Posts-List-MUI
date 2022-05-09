@@ -2,19 +2,28 @@ import React, { useState, useEffect } from "react";
 import api from "./utils/Api";
 import useDebounce from './hooks/useDebounce';
 import { Routes, Route, useNavigate } from "react-router-dom";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Container, Box } from "@mui/material";
+
 import { AppContext } from './context/appContext';
 import { CurrentUserContext } from './context/CurrentUserContext';
 import { CurrentPostsContext } from "./context/CurrentPostsContext";
 import { CurrentAllUsersContext } from "./context/CurrentAllUsersContext";
+
+import { PostPage } from "./pages/PostPage/PostPage";
+import { PostDetailsPage } from "./pages/PostDetailsPage/PostDetailsPage";
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
+
 import { Header } from "./components/Header";
 import { Search } from "./components/Search/Search";
 import Breadcrumbs from "./components/Breadcrumbs";
-import { PostPage } from "./pages/PostPage/PostPage";
-import { PostDetailsPage } from "./pages/PostDetailsPage/PostDetailsPage";
 import { Footer } from "./components/Footer";
-import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Container, Box } from "@mui/material";
+import { ButtonScrollTop } from "./components/ButtonScrollTop/ButtonScrollTop";
+import { SimpleForm } from "./components/SimpleForm/SimpleForm";
+import { Registration } from "./components/Registration/Registration";
+import { AuthorAvatar } from "./components/AuthorAvatar/AuthorAvatar";
+
 
 const theme = createTheme({
     palette: {
@@ -48,7 +57,6 @@ export const App = () => {
     const delaySearchQuery = useDebounce(searchQuery, 200);
     const [allUsers, setAllUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -192,19 +200,30 @@ export const App = () => {
                                     flexDirection: "column",
                                 }}>
                                 <Header>
-                                    <Search searchText={searchQuery}/>
+                                    <Search searchText={searchQuery} />
+                                    <Box sx={{pl: "15px"}}>
+                                        <AuthorAvatar />
+                                    </Box>
+                                    <Registration />
                                 </Header>
+
+                                {/* <RegistrationForm /> */}
+
                                 <Box sx={{ pl: "10px", mb: 1 }}>
                                     <Breadcrumbs />
                                 </Box>
                                 <Box sx={{ flex: "1 0 auto" }}>
                                     <Routes>
                                         <Route path="/" element={
-                                            <PostPage
-                                                searchCount={posts.length}
-                                                searchText={searchQuery}
-                                                isLoading={isLoading} />}
-                                        />
+                                            <>
+                                                <PostPage
+                                                    searchCount={posts.length}
+                                                    searchText={searchQuery}
+                                                    isLoading={isLoading}
+                                                />
+                                                <ButtonScrollTop />
+                                            </>
+                                        } />
                                         <Route path="/post/:postID" element={
                                             <PostDetailsPage />}
                                         />

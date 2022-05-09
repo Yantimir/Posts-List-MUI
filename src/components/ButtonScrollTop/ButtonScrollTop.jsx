@@ -17,11 +17,12 @@ export const ButtonScrollTop = () => {
             }
         }
     }
-
+    
     return (
-
-        <IconButton id="scrollTop" className="isShowBtn isShowBtn_hide" >
-            <ArrowUpwardOutlined onClick={() => { window.scrollTo(0, 0); }} />
+        <IconButton id="scrollTop" className="isShowBtn isShowBtn_hide" onClick={(e) => { 
+            e.preventDefault();
+            window.scrollTo(0, 0); }}>
+            <ArrowUpwardOutlined  />
         </IconButton >
     );
 }

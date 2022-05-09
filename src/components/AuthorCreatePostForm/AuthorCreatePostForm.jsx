@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AppContext } from "../../context/appContext";
-import { Box, Button, Typography, TextField } from "@mui/material";
+import { Box, Button, Typography, TextField, Stack } from "@mui/material";
 
 export const AuthorCreatePostForm = ({ titleForm, titleButton, handleCloseNewPost }) => {
 
@@ -16,12 +16,12 @@ export const AuthorCreatePostForm = ({ titleForm, titleButton, handleCloseNewPos
     }
 
     return (
-        <Box
+        <Stack
             component="form"
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit(onSubmit)}
-            sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", maxWidth: "300px" }}
+            sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "300px" }}
         >
              <Box>
                 <Typography variant="h6" color="text.secondary">{titleForm}</Typography>
@@ -34,7 +34,7 @@ export const AuthorCreatePostForm = ({ titleForm, titleButton, handleCloseNewPos
                 size="small"
                 label="image URL"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1, width: "100%"}}
             />
             <Box component="div">
                 {errors?.image && <Box color="red" sx={{ textAlign: "center", fontSize: "10px" }}>{errors?.image?.message}</Box>}
@@ -48,7 +48,7 @@ export const AuthorCreatePostForm = ({ titleForm, titleButton, handleCloseNewPos
                 size="small"
                 label="Title"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1, width: "100%"}}
             />
             <Box component="div">
                 {errors?.title && <Box color="red" sx={{ textAlign: "center", fontSize: "10px" }}>{errors?.title?.message}</Box>}
@@ -62,7 +62,7 @@ export const AuthorCreatePostForm = ({ titleForm, titleButton, handleCloseNewPos
                 size="small"
                 label="Text"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1, width: "100%"}}
             />
             <Box component="div">
                 {errors?.text && <Box color="red" sx={{ textAlign: "center", fontSize: "10px" }}>{errors?.text?.message}</Box>}
@@ -72,14 +72,14 @@ export const AuthorCreatePostForm = ({ titleForm, titleButton, handleCloseNewPos
                 size="small"
                 label="Tags"
                 variant="outlined"
-                sx={{ m: 1, width: '300px' }}
+                sx={{ m: 1, width: "100%"}}
             />
             <Button
                 variant="contained"
                 type="submit"
-                sx={{ width: '300px', m: 1 }}
+                sx={{ m: 1, width: "100%" }}
             >{titleButton}
             </Button>
-        </Box>
+        </Stack>
     );
 }
