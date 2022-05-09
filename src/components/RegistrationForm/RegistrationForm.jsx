@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Button, Typography, TextField } from "@mui/material";
+import { AppContext } from "../../context/appContext";
 
-export const RegistrationForm = ({ titleForm, titleButton }) => {
+export const RegistrationForm = ({ titleForm, titleButton, handleCloseModal }) => {
 
+    const { handleSignupUser } = useContext(AppContext);
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: "onBlur"
     });
 
     function handleRegistrationFormSubmit(data) {
-        console.log(data)
+        handleSignupUser(data);
+        handleCloseModal();
     }
 
     return (
@@ -20,7 +23,7 @@ export const RegistrationForm = ({ titleForm, titleButton }) => {
             onSubmit={handleSubmit(handleRegistrationFormSubmit)}
             sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "300px" }}
         >
-            <Typography>{titleForm}</Typography>
+            <Typography variant="h6" color="text.secondary">{titleForm}</Typography>
             <TextField
                 {...register(
                     "name",

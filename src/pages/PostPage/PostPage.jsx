@@ -25,7 +25,7 @@ export const PostPage = ({ searchCount, searchText, isLoading }) => {
                     <Grid item xs={4}>
                         <Item sx={{ pt: "33px" }}>
                             <AuthorSidebar />
-                            <UsersListSidebar />
+                            <UsersListSidebar searchCount={searchCount} searchText={searchText}/>
                         </Item>
                     </Grid>
 
@@ -33,9 +33,8 @@ export const PostPage = ({ searchCount, searchText, isLoading }) => {
                         ? <LinearProgress />
                         : <Grid item xs={8}>
                             <Item sx={{ mb: 5, pt: 5 }}>
-                                <SearchInfo searchCount={searchCount} searchText={searchText} />
+                                {/* <SearchInfo searchCount={searchCount} searchText={searchText} /> */}
                                 <PostsList />
-                                {/* <ButtonScrollTop /> */}
                             </Item>
                         </Grid>}
                 </Grid>

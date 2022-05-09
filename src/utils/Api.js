@@ -8,6 +8,7 @@ const onError = (err) => {
     alert("Что-то пошло не так!");
 }
 class Api {
+
     constructor({ baseUrl, token, headers }) {
         this._baseUrl = baseUrl;
         // this._token = `Bearer ${token}`;
@@ -20,8 +21,8 @@ class Api {
             headers: this.headers,
         }).then(onResponse)
             .catch(onError)
-    } 
-    // получение всех постов-------------------------------------------------
+    }
+    // получение всех постов
     getAllPosts() {
         return fetch(`${this._baseUrl}/posts`, {
             headers: this.headers,
@@ -44,7 +45,7 @@ class Api {
             .catch(onError)
     }
     // редактирование текущего поста
-    editPostById(postId , postData) {
+    editPostById(postId, postData) {
         return fetch(`${this._baseUrl}/posts/${postId}`, {
             method: "PATCH",
             headers: this.headers,
@@ -90,7 +91,7 @@ class Api {
             body: JSON.stringify(commentData),
         }).then(onResponse)
             .catch(onError)
-    }    
+    }
     // удаление комментария по id
     deleteComment(postId, commentId) {
         return fetch(`${this._baseUrl}/posts/comments/${postId}/${commentId}`, {
@@ -104,7 +105,7 @@ class Api {
     //-----------------------------------------------------------------------
 
     //ПОЛЬЗОВАТЕЛЬ
-    //получение всех пользователей-------------------------------------------
+    //получение всех пользователей
     getAllUsers() {
         return fetch(`${this._baseUrl}/users`, {
             headers: this.headers,
@@ -144,6 +145,22 @@ class Api {
             .catch(onError)
     }
     //---------------------------------------------------------------------
+
+
+    //РЕГИСТРАЦИЯ ПОЛЬЗОВАТЕЛЯ
+    // регистрация
+    signupUser(dataUser) {
+        return fetch(`${this._baseUrl}/signup`, {
+            method: "POST",
+            headers: this.headers,
+            body: JSON.stringify(dataUser),
+        }).then(onResponse)
+            .catch(onError)
+    }
+    // POST https://api.react-learning.ru/signin // авторизация
+    // POST https://api.react-learning.ru/password-reset // сброс пароля на почту
+    // POST https://api.react-learning.ru/password-reset/:userId/:token // смена пароля после подтвержения токеном
+
 }
 
 const config = {

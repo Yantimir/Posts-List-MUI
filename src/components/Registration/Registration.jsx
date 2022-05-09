@@ -6,25 +6,26 @@ import { IconButton } from "@mui/material";
 
 export const Registration = () => {
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [openModal, setOpenModal] = useState(false);
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
 
     return (
         <>
-            <IconButton>
+            <IconButton onClick={handleOpenModal}>
                 {/* ?  */}
-                <LoginOutlined onClick={handleOpen} sx={{ color: "#ffffff" }} />
+                <LoginOutlined  sx={{ color: "#ffffff" }} />
                 {/* :  */}
                 {/* <LogoutOutlined sx={{ color: "#ffffff" }}/> */}
             </IconButton>
             <Modal
-                openModal={open}
-                handleCloseModal={handleClose}
+                openModal={openModal}
+                handleCloseModal={handleCloseModal}
             >
                 <RegistrationForm
                     titleForm="Зарегестрироваться"
-                    titleButton="Отправить"
+                    titleButton="Зарегестрироваться"
+                    handleCloseModal={handleCloseModal}
                 />
             </Modal>
         </>

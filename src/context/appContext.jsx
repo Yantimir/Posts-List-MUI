@@ -11,6 +11,7 @@ export const AppContext = React.createContext({
     handleSendEditPost: () => {},
     handleSendNewComment: () => {},
     handleDeleteComment: () => {},
+    handleSignupUser: () => {},
     isLoading: false,
 })
 AppContext.displayName = "AppContext";

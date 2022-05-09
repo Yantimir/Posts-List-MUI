@@ -20,7 +20,6 @@ import { Search } from "./components/Search/Search";
 import Breadcrumbs from "./components/Breadcrumbs";
 import { Footer } from "./components/Footer";
 import { ButtonScrollTop } from "./components/ButtonScrollTop/ButtonScrollTop";
-import { SimpleForm } from "./components/SimpleForm/SimpleForm";
 import { Registration } from "./components/Registration/Registration";
 import { AuthorAvatar } from "./components/AuthorAvatar/AuthorAvatar";
 
@@ -66,7 +65,7 @@ export const App = () => {
                 setPosts(postsData);
                 setCurrentUser(userData);
                 setAllUsers(usersData);
-                handleRequest(postsData); // поиск
+                handleRequest(usersData); // поиск
             })
             .catch(err => alert(err))
             .finally(() => {
@@ -83,7 +82,8 @@ export const App = () => {
         navigate("/");
         handleRequest();
     }
-    const handleRequest = (postsData) => {
+    
+    const handleRequest = (usersData) => {
         // поиск по title
         // api.searchPosts(searchQuery)
         //     .then(dataSearch => setPosts(dataSearch))
@@ -91,15 +91,14 @@ export const App = () => {
 
         // поиск по автору
         if (searchQuery !== "") {
-            const filterPosts = postsData.filter(post => post?.author?.name.toLowerCase().includes(searchQuery.toLowerCase()));
-            setPosts(prevState => filterPosts);
+            const filterUsers = usersData.filter(user => user?.name.toLowerCase().includes(searchQuery.toLowerCase()));
+            setAllUsers(prevState => filterUsers);
         }
     }
     // очистка поиска 
     const clearSearch = () => {
         setSearchQuery("");
     }
-
     // установка лайка
     function handlePostLike(postId, isLiked) {
         api.changeLikeStatus(postId, isLiked)
@@ -174,6 +173,17 @@ export const App = () => {
                 setPosts(newCommentState);
             });
     }
+    //регистрация
+    function handleSignupUser(dataUser) {
+        api.signupUser(dataUser)
+            .then((newDataUser) => {
+                console.log(newDataUser)
+                // const newCommentState = posts.map(comment => {
+                //     return comment._id === newCommentData._id ? newCommentData : comment;
+                // });
+                // setPosts(newCommentState);
+            });
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -189,6 +199,7 @@ export const App = () => {
                 handleSendEditPost,
                 handleSendNewComment,
                 handleDeleteComment,
+                handleSignupUser,
             }}>
                 <CurrentPostsContext.Provider value={posts}>
                     <CurrentAllUsersContext.Provider value={allUsers}>
@@ -200,15 +211,12 @@ export const App = () => {
                                     flexDirection: "column",
                                 }}>
                                 <Header>
-                                    <Search searchText={searchQuery} />
+                                    {/* <Search searchText={searchQuery} /> */}
                                     <Box sx={{pl: "15px"}}>
                                         <AuthorAvatar />
                                     </Box>
                                     <Registration />
                                 </Header>
-
-                                {/* <RegistrationForm /> */}
-
                                 <Box sx={{ pl: "10px", mb: 1 }}>
                                     <Breadcrumbs />
                                 </Box>
@@ -217,7 +225,7 @@ export const App = () => {
                                         <Route path="/" element={
                                             <>
                                                 <PostPage
-                                                    searchCount={posts.length}
+                                                    searchCount={allUsers.length}
                                                     searchText={searchQuery}
                                                     isLoading={isLoading}
                                                 />

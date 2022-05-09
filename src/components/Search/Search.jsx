@@ -8,8 +8,8 @@ import { ReactComponent as CloseIcon } from './img/ic-close-input.svg';
 export const Search = ({ searchText = "" }) => {
 
     const { handleInputChange, handleFormSubmit, clearSearch } = useContext(AppContext);
-
     const [searchQuery, setSearchQuery] = useState("");
+
     useEffect(() => {
         setSearchQuery(searchText);
     });

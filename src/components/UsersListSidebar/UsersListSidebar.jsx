@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, CardActions, CardContent, Collapse, IconButton, Typography } from '@mui/material';
 import { UsersList } from '../UsersLIst/UsersList';
-import { ExpandMore, GroupOutlined } from '@mui/icons-material';
+import { ExpandMore, GroupOutlined} from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
+import {Search} from "../Search/Search";
+import { SearchInfo } from '../SearchInfo/SearchInfo';
 
 const ExpandMoreStyle = styled((props) => {
     const { expand, ...other } = props;
@@ -12,7 +14,7 @@ const ExpandMoreStyle = styled((props) => {
     marginLeft: 'auto',
 }));
 
-export const UsersListSidebar = () => {
+export const UsersListSidebar = ({ searchCount, searchText }) => {
 
     // открытие/закрытие выпадающего меню
     const [expanded, setExpanded] = useState(false);
@@ -57,7 +59,11 @@ export const UsersListSidebar = () => {
                 </ExpandMoreStyle>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <Box sx={{pl: "8px"}}>
+                <Box sx={{mb: "15px", px: "8px"}}>
+                    <Search searchText={searchText}/>
+                </Box>
+                <SearchInfo searchCount={searchCount} searchText={searchText} />
+                <Box sx={{ pl: "8px" }}>
                     <UsersList />
                 </Box>
             </Collapse>
