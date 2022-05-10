@@ -5,8 +5,7 @@ import { SearchInfo } from '../../components/SearchInfo/SearchInfo';
 import { PostsList } from '../../components/PostsList/index';
 import { Box, Container, Grid, Paper } from '@mui/material';
 import { styled } from "@mui/material/styles";
-import LinearProgress from '../../components/LinearProgress/LinearProgress';
-import { ButtonScrollTop } from '../../components/ButtonScrollTop/ButtonScrollTop';
+import Spinner from '../../components/Spinner';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#f7f7f7',
@@ -16,29 +15,33 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export const PostPage = ({ searchCount, searchText, isLoading }) => {
+export const PostPage = ({ searchCountUsers, searchTextUsers, searchCountPosts, searchTextPosts,isLoading }) => {
 
     return (
-        <Container>
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        <Item sx={{ pt: "33px" }}>
-                            <AuthorSidebar />
-                            <UsersListSidebar searchCount={searchCount} searchText={searchText}/>
-                        </Item>
-                    </Grid>
-
-                    {isLoading
-                        ? <LinearProgress />
-                        : <Grid item xs={8}>
+        <>
+            {isLoading && <Spinner />}
+            {<Container>
+                <Box sx={{ flexGrow: 1 }}>
+                    {<Grid container spacing={2}>
+                        <Grid item xs={4}>
+                            <Item sx={{ pt: "33px" }}>
+                                <AuthorSidebar />
+                                <UsersListSidebar
+                                    searchCount={searchCountUsers}
+                                    searchText={searchTextUsers}
+                                />
+                            </Item>
+                        </Grid>
+                        <Grid item xs={8}>
                             <Item sx={{ mb: 5, pt: 5 }}>
-                                {/* <SearchInfo searchCount={searchCount} searchText={searchText} /> */}
+                                <SearchInfo searchCount={searchCountPosts} searchText={searchTextPosts} searchTarget="постов"/>
                                 <PostsList />
                             </Item>
-                        </Grid>}
-                </Grid>
-            </Box>
-        </Container>
+                        </Grid>
+                    </Grid>}
+                </Box>
+            </Container>}
+        </>
+
     );
 } 

@@ -11,7 +11,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
     backgroundColor: amber[400],
     '&:hover': {
         backgroundColor: amber[500],
-    },
+    }
 }));
 
 export const AuthorInfoEditForm = ({ handleExpandClick }) => {
@@ -60,8 +60,8 @@ export const AuthorInfoEditForm = ({ handleExpandClick }) => {
             <Box>
                 {errors?.about && <Box color="red" sx={{ textAlign: "center", fontSize: "10px" }}>{errors?.about?.message}</Box>}
             </Box>
-            <Box sx={{ display: "flex" }}>
-                <Box sx={{ m: 1 }}>
+            <Box>
+                <Box sx={{ m: 1, display: "inline-block"}}>
                     <Button
                         size="small"
                         variant="contained"
@@ -71,7 +71,7 @@ export const AuthorInfoEditForm = ({ handleExpandClick }) => {
                     >Отменить
                     </Button>
                 </Box>
-                <Box sx={{ m: 1 }}>
+                <Box sx={{ m: 1, display: "inline-block"}}>
                     <ColorButton
                         size="small"
                         variant="contained"

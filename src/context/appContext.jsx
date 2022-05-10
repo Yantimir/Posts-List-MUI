@@ -1,8 +1,11 @@
 import React from "react"
 export const AppContext = React.createContext({
-    handleInputChange: () => {},
-    handleFormSubmit: () => {},
-    clearSearch: () => {},
+    handleInputChangeUsers: () => {},
+    handleInputChangePosts: () => {},
+    handleFormSubmitUsers: () => {},
+    handleFormSubmitPosts: () => {},
+    clearSearchUsers: () => {},
+    clearSearchPosts: () => {},
     handlePostLike: () => {},
     handleDeletePost: () => {},
     handleSendNewAvatar: () => {},

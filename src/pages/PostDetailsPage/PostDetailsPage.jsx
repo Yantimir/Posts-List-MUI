@@ -5,7 +5,7 @@ import api from "../../utils/Api";
 import { useApi } from "../../hooks/useApi";
 import { UserPost } from "../../components/UserPost";
 import { NotFound } from "../../components/NotFound/NotFound";
-import LinearIndeterminate from "../../components/LinearProgress/LinearProgress";
+import Spinner from "../../components/Spinner";
 
 
 export const PostDetailsPage = () => {
@@ -21,7 +21,7 @@ export const PostDetailsPage = () => {
 
     return (
         <>
-            {loading && <LinearIndeterminate />}
+            {loading && <Spinner />}
             {error && <NotFound title="Пост не найден" buttonText="Назад" buttonAction={() => navigate(-1)} />}
             {post && <UserPost {...post} />}
         </>

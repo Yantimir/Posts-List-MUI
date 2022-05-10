@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, CardActions, CardContent, Collapse, IconButton, Typography } from '@mui/material';
+import { Box, CardActions, Collapse, IconButton, Typography } from '@mui/material';
 import { UsersList } from '../UsersLIst/UsersList';
-import { ExpandMore, GroupOutlined} from '@mui/icons-material';
+import { ExpandMore, GroupOutlined } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import {Search} from "../Search/Search";
+import { SearchUsers } from "../SearchUsers/SearchUsers";
 import { SearchInfo } from '../SearchInfo/SearchInfo';
 
 const ExpandMoreStyle = styled((props) => {
@@ -59,10 +59,14 @@ export const UsersListSidebar = ({ searchCount, searchText }) => {
                 </ExpandMoreStyle>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <Box sx={{mb: "15px", px: "8px"}}>
-                    <Search searchText={searchText}/>
+                <Box sx={{ mb: "15px", px: "10px" }}>
+                    <SearchUsers searchText={searchText} />
                 </Box>
-                <SearchInfo searchCount={searchCount} searchText={searchText} />
+                <SearchInfo
+                    searchCount={searchCount}
+                    searchText={searchText}
+                    searchTarget="автора"
+                />
                 <Box sx={{ pl: "8px" }}>
                     <UsersList />
                 </Box>

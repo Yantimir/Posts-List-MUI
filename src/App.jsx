@@ -16,12 +16,13 @@ import { PostDetailsPage } from "./pages/PostDetailsPage/PostDetailsPage";
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 import { Header } from "./components/Header";
-import { Search } from "./components/Search/Search";
+// import { Search } from "./components/Search/Search";
 import Breadcrumbs from "./components/Breadcrumbs";
 import { Footer } from "./components/Footer";
 import { ButtonScrollTop } from "./components/ButtonScrollTop/ButtonScrollTop";
 import { Registration } from "./components/Registration/Registration";
 import { AuthorAvatar } from "./components/AuthorAvatar/AuthorAvatar";
+import { SearchPosts } from "./components/SearchPosts/SearchPosts";
 
 
 const theme = createTheme({
@@ -52,8 +53,10 @@ export const App = () => {
 
     const [posts, setPosts] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
-    const [searchQuery, setSearchQuery] = useState("");
-    const delaySearchQuery = useDebounce(searchQuery, 200);
+    const [searchQueryUsers, setSearchQueryUsers] = useState("");
+    const [searchQueryPosts, setSearchQueryPosts] = useState("");
+    const delaySearchQueryUsers = useDebounce(searchQueryUsers, 200);
+    const delaySearchQueryPosts = useDebounce(searchQueryPosts, 200);
     const [allUsers, setAllUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -65,39 +68,55 @@ export const App = () => {
                 setPosts(postsData);
                 setCurrentUser(userData);
                 setAllUsers(usersData);
-                handleRequest(usersData); // поиск
+                handleRequestUsers(usersData); // поиск по пользователям
+                handleRequestPosts(postsData); // поиск по постам
             })
             .catch(err => alert(err))
             .finally(() => {
                 setIsLoading(false);
             })
-    }, [delaySearchQuery]);
+    }, [delaySearchQueryUsers, delaySearchQueryPosts]);
 
     // поиск по автору и по title
-    const handleInputChange = (inputValue) => {
-        setSearchQuery(inputValue);
-    }
-    const handleFormSubmit = (inputValue) => {
-        setSearchQuery(inputValue);
-        navigate("/");
-        handleRequest();
-    }
-    
-    const handleRequest = (usersData) => {
-        // поиск по title
-        // api.searchPosts(searchQuery)
-        //     .then(dataSearch => setPosts(dataSearch))
-        //     .catch(error => console.log(error))
+    const handleInputChangeUsers = (inputValueUsers) => {
+        setSearchQueryUsers(inputValueUsers);
 
+    }
+    const handleInputChangePosts = (inputValuePosts) => {
+        setSearchQueryPosts(inputValuePosts);
+
+    }
+    const handleFormSubmitUsers = (inputValueUsers) => {
+        setSearchQueryUsers(inputValueUsers);
+        navigate("/");
+        handleRequestUsers();
+    }
+
+    const handleFormSubmitPosts = (inputValuePosts) => {
+        setSearchQueryPosts(inputValuePosts);
+        navigate("/");
+        handleRequestPosts();
+    }
+
+    const handleRequestPosts = () => {
+        //поиск по title
+        api.searchPosts(searchQueryPosts)
+            .then(dataSearchPosts => setPosts(dataSearchPosts))
+            .catch(error => console.log(error))
+    }
+    const handleRequestUsers = (usersData) => {
         // поиск по автору
-        if (searchQuery !== "") {
-            const filterUsers = usersData.filter(user => user?.name.toLowerCase().includes(searchQuery.toLowerCase()));
+        if (searchQueryUsers !== "") {
+            const filterUsers = usersData.filter(user => user?.name.toLowerCase().includes(searchQueryUsers.toLowerCase()));
             setAllUsers(prevState => filterUsers);
         }
     }
     // очистка поиска 
-    const clearSearch = () => {
-        setSearchQuery("");
+    const clearSearchUsers = () => {
+        setSearchQueryUsers("");
+    }
+    const clearSearchPosts = () => {
+        setSearchQueryPosts("");
     }
     // установка лайка
     function handlePostLike(postId, isLiked) {
@@ -178,19 +197,18 @@ export const App = () => {
         api.signupUser(dataUser)
             .then((newDataUser) => {
                 console.log(newDataUser)
-                // const newCommentState = posts.map(comment => {
-                //     return comment._id === newCommentData._id ? newCommentData : comment;
-                // });
-                // setPosts(newCommentState);
             });
     }
 
     return (
         <ThemeProvider theme={theme}>
             <AppContext.Provider value={{
-                handleInputChange,
-                handleFormSubmit,
-                clearSearch,
+                handleInputChangeUsers,
+                handleInputChangePosts,
+                handleFormSubmitUsers,
+                handleFormSubmitPosts,
+                clearSearchUsers,
+                clearSearchPosts,
                 handlePostLike,
                 handleDeletePost,
                 handleSendNewAvatar,
@@ -208,11 +226,12 @@ export const App = () => {
                                 sx={{
                                     display: "flex",
                                     minHeight: "100vh",
-                                    flexDirection: "column",
+                                    flexDirection: "column"
                                 }}>
+                                <ButtonScrollTop />
                                 <Header>
-                                    {/* <Search searchText={searchQuery} /> */}
-                                    <Box sx={{pl: "15px"}}>
+                                    <SearchPosts searchText={searchQueryPosts} />
+                                    <Box sx={{ pl: "15px" }}>
                                         <AuthorAvatar />
                                     </Box>
                                     <Registration />
@@ -225,11 +244,12 @@ export const App = () => {
                                         <Route path="/" element={
                                             <>
                                                 <PostPage
-                                                    searchCount={allUsers.length}
-                                                    searchText={searchQuery}
+                                                    searchCountUsers={allUsers.length}
+                                                    searchTextUsers={searchQueryUsers}
+                                                    searchCountPosts={posts.length}
+                                                    searchTextPosts={searchQueryPosts}
                                                     isLoading={isLoading}
                                                 />
-                                                <ButtonScrollTop />
                                             </>
                                         } />
                                         <Route path="/post/:postID" element={
