@@ -81,13 +81,6 @@ export const Comment = ({ handleDeleteCommentClick, comments, author }) => {
                     </Box>
                     <Box sx={{ ml: "50px", mr: "40px", mb: "30px" }}>
                         <Typography
-                            // sx={{
-                            //     overflow: "visible",
-                            //     flexDirection: "row",
-                            //     flex: "1",
-                            //     flexWrap: "wrap",
-                            //     flexShink: "1"
-                            // }}
                             variant="body2"
                             color="text.secondary"
                         >

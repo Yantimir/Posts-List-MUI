@@ -1,33 +1,14 @@
-import React, { useState } from "react";
-import Modal from "../Modal/Modal";
-import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
-import { LoginOutlined, LogoutOutlined } from "@mui/icons-material";
+import React from "react";
+import { LoginOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
-export const Registration = () => {
-
-    const [openModal, setOpenModal] = useState(false);
-    const handleOpenModal = () => setOpenModal(true);
-    const handleCloseModal = () => setOpenModal(false);
+export const Registration = ({ handleOpenModal }) => {
 
     return (
         <>
             <IconButton onClick={handleOpenModal}>
-                {/* ?  */}
-                <LoginOutlined  sx={{ color: "#ffffff" }} />
-                {/* :  */}
-                {/* <LogoutOutlined sx={{ color: "#ffffff" }}/> */}
+                <LoginOutlined sx={{ color: "#ffffff" }} />
             </IconButton>
-            <Modal
-                openModal={openModal}
-                handleCloseModal={handleCloseModal}
-            >
-                <RegistrationForm
-                    titleForm="Зарегестрироваться"
-                    titleButton="Зарегестрироваться"
-                    handleCloseModal={handleCloseModal}
-                />
-            </Modal>
         </>
     );
 }

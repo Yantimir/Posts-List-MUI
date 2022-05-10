@@ -2,10 +2,6 @@ import React, { useContext } from "react";
 import { CurrentUserContext } from './../../context/CurrentUserContext';
 import { Avatar } from "@mui/material";
 
-
-
-
-
 export const AuthorAvatar = () => {
 
     const currentUser = useContext(CurrentUserContext);

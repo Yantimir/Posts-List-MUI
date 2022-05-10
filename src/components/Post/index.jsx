@@ -22,6 +22,7 @@ export const Post = ({_id ,image, likes, tags, comments, title, author, text, cr
 
     const location = useLocation();
     const state = location.state;
+    
 
     const dataCreated = dayjs(created_at).format("DD MMMM YYYY HH:mm");
     const dataLastEdit = dayjs(updated_at).format("dddd, DD-MMMM-YYYY HH:mm");

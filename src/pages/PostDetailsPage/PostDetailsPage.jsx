@@ -9,6 +9,7 @@ import Spinner from "../../components/Spinner";
 
 
 export const PostDetailsPage = () => {
+    
     const posts = useContext(CurrentPostsContext);
     const navigate = useNavigate();
     const { postID } = useParams();

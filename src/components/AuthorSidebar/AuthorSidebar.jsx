@@ -8,6 +8,7 @@ import { AddAPhotoTwoTone, MailOutlined, BusinessCenterOutlined } from '@mui/ico
 import { IconButton, Box, Avatar, Typography, Button, CardActions, Collapse } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { Socials } from '../Socials';
+import { Link } from 'react-router-dom';
 
 const ExpandMoreStyle = styled((props) => {
     const { expand, ...other } = props;
@@ -20,9 +21,9 @@ const ExpandMoreStyle = styled((props) => {
 export const AuthorSidebar = () => {
 
     const currentUser = useContext(CurrentUserContext);
-    const [openModalAvatar, setOpenModalAvatar] = useState(false);
-    const handleOpenModalAvatar = () => setOpenModalAvatar(true);
-    const handleCloseModalAvatar = () => setOpenModalAvatar(false);
+    const [openModal, setOpenModal] = useState(false);
+    const handleOpenModal = () => setOpenModal(true);
+    const handleCloseModal = () => setOpenModal(false);
     const fakeAvatar = "https://react-learning.ru/image-compressed/default-image.jpg";
     const currentUserName = currentUser?.name?.split(" ").slice(0, 2).join(" "); // ФИ
     const letterAvatar = currentUser?.name?.split(" ").slice(0, 2).map(n => n.slice(0, 1)).join("");
@@ -49,32 +50,35 @@ export const AuthorSidebar = () => {
         <Box>
             <Box sx={{ display: "flex" }}>
                 <Box>
-                    <IconButton
-                        id="fade-button"
-                        aria-controls={openModalAvatar ? 'fade-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={openModalAvatar ? 'true' : undefined}
-                        onClick={handleOpenModalAvatar}
-                    >
-                        {currentUser.avatar && currentUser.avatar === fakeAvatar
-                            ? <Avatar
-                                alt="avatar"
-                            >
-                                {letterAvatar}
-                            </Avatar>
-                            : <Avatar
-                                src={currentUser?.avatar}
-                                alt="Mingazitdinov"
-                            >
-                                {!currentUser.avatar && currentUser.name}
-                            </Avatar>}
-                        <AddAPhotoTwoTone sx={{ color: "#444444", fontSize: "large", position: "absolute", top: "5px", right: "1px" }} />
-                    </IconButton>
+                    {/* <Link to={"editavatar"}> */}
+                        <IconButton
+                            id="fade-button"
+                            aria-controls={openModal ? 'fade-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={openModal ? 'true' : undefined}
+                            onClick={handleOpenModal}
+                        >
+                            {currentUser.avatar && currentUser.avatar === fakeAvatar
+                                ? <Avatar
+                                    alt="avatar"
+                                >
+                                    {letterAvatar}
+                                </Avatar>
+                                : <Avatar
+                                    src={currentUser?.avatar}
+                                    alt="Mingazitdinov"
+                                >
+                                    {!currentUser.avatar && currentUser.name}
+                                </Avatar>}
+                            <AddAPhotoTwoTone sx={{ color: "#444444", fontSize: "large", position: "absolute", top: "5px", right: "1px" }} />
+                        </IconButton>
+                    {/* </Link> */}
+
                     <Modal
-                        openModal={openModalAvatar}
-                        handleCloseModal={handleCloseModalAvatar}
+                        openModal={openModal}
+                        handleCloseModal={handleCloseModal}
                     >
-                        <AuthorAvatarEditForm handleCloseModal={handleCloseModalAvatar} />
+                        <AuthorAvatarEditForm handleCloseModal={handleCloseModal} />
                     </Modal>
                 </Box>
                 <Box sx={{ pl: "10px", mb: "5px" }}>
@@ -103,7 +107,7 @@ export const AuthorSidebar = () => {
                     {currentUser && <Socials />}
                 </Box>
             </Box>
-            <CardActions disableSpacing sx={{display: "block", pr: "10px", pl: "10px"}}>
+            <CardActions disableSpacing sx={{ display: "block", pr: "10px", pl: "10px" }}>
                 <ExpandMoreStyle
                     fontSize="small"
                     expand={expanded}
@@ -112,7 +116,7 @@ export const AuthorSidebar = () => {
                 >
                     {!expanded &&
                         <Button
-                            sx={{ width: "100%"}}
+                            sx={{ width: "100%" }}
                             variant="contained"
                             size="small"
                             // expand={expanded}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import api from "./utils/Api";
 import useDebounce from './hooks/useDebounce';
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation, Link } from "react-router-dom";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Container, Box } from "@mui/material";
+import { Container, Box, IconButton } from "@mui/material";
 
 import { AppContext } from './context/appContext';
 import { CurrentUserContext } from './context/CurrentUserContext';
@@ -16,14 +16,14 @@ import { PostDetailsPage } from "./pages/PostDetailsPage/PostDetailsPage";
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 import { Header } from "./components/Header";
-// import { Search } from "./components/Search/Search";
+import { SearchPosts } from "./components/SearchPosts/SearchPosts";
 import Breadcrumbs from "./components/Breadcrumbs";
 import { Footer } from "./components/Footer";
 import { ButtonScrollTop } from "./components/ButtonScrollTop/ButtonScrollTop";
 import { Registration } from "./components/Registration/Registration";
 import { AuthorAvatar } from "./components/AuthorAvatar/AuthorAvatar";
-import { SearchPosts } from "./components/SearchPosts/SearchPosts";
-
+import Modal from "./components/Modal/Modal"
+import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm";
 
 const theme = createTheme({
     palette: {
@@ -60,6 +60,17 @@ export const App = () => {
     const [allUsers, setAllUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+    const [openModalAuth, setOpenModalAuth] = useState(false);
+    const handleOpenModalAuth = () => setOpenModalAuth(true);
+    const handleCloseModalAuth = () => {
+        setOpenModalAuth(false);
+        navigate(-1);
+    };
+
+    const location = useLocation();
+    const state = location.state;
+    console.log(state)
 
     useEffect(() => {
         setIsLoading(true);
@@ -234,13 +245,17 @@ export const App = () => {
                                     <Box sx={{ pl: "15px" }}>
                                         <AuthorAvatar />
                                     </Box>
-                                    <Registration />
+                                    <Link
+                                        to="/login"
+                                        state={{ backgroundLocation: location, initialPath: location.pathname }}>
+                                        <Registration handleOpenModal={handleOpenModalAuth} />
+                                    </Link>
                                 </Header>
                                 <Box sx={{ pl: "10px", mb: 1 }}>
                                     <Breadcrumbs />
                                 </Box>
                                 <Box sx={{ flex: "1 0 auto" }}>
-                                    <Routes>
+                                    <Routes location={state && { ...state?.backgroundLocation, pathname: state?.initialPath } || location}>
                                         <Route path="/" element={
                                             <>
                                                 <PostPage
@@ -259,6 +274,68 @@ export const App = () => {
                                             <NotFoundPage />}
                                         />
                                     </Routes>
+
+                                    {state?.backgroundLocation && (
+                                        <Routes>
+                                            <Route path="/login" element={
+                                                <Modal
+                                                    openModal={openModalAuth}
+                                                    handleCloseModal={handleCloseModalAuth}
+                                                >
+                                                    {/* <RegistrationForm
+                                                        titleForm="Авторизоваться"
+                                                        titleButton="Авторизоваться"
+                                                        handleCloseModal={handleCloseModalAuth}
+                                                    /> */}
+                                                    Авторизация
+                                                    <Box>
+                                                        <Link
+                                                            to="/register"
+                                                            replace={true}
+                                                            state={{ ...state, backgroundLocation: location }}>
+                                                            {/* <RegistrationForm
+                                                                titleForm="Зарегестрироваться"
+                                                                titleButton="Зарегестрироваться"
+                                                                handleCloseModal={handleCloseModalAuth}
+                                                            /> */}
+                                                            Зарегестрироваться
+                                                        </Link>
+                                                    </Box>
+                                                    <Box>
+                                                        <Link
+                                                            to="/forgot"
+                                                            replace={true}
+                                                            state={{ ...state, backgroundLocation: location }}>
+                                                            Восстановить пароль
+                                                        </Link>
+                                                    </Box>
+                                                </Modal>
+                                            } />
+                                            <Route path="/register" element={
+                                                <Modal
+                                                    openModal={openModalAuth}
+                                                    handleCloseModal={handleCloseModalAuth}
+                                                >
+                                                    Регистрация
+                                                    <Link
+                                                        to="/login"
+                                                        replace={true}
+                                                        state={{ ...state, backgroundLocation: location }}>
+                                                        Войти
+                                                    </Link>
+                                                </Modal>
+                                            } />
+                                            <Route path="/forgot" element={
+                                                <Modal
+                                                    openModal={openModalAuth}
+                                                    handleCloseModal={handleCloseModalAuth}
+                                                >
+                                                    Восстановление пароля
+                                                </Modal>
+                                            } />
+                                        </Routes>
+                                    )}
+
                                 </Box>
                                 <Footer sx={{ flex: "0 0 auto" }} />
                             </Container>
