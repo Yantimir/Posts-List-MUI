@@ -4,6 +4,7 @@
   "main": "index.js",
   "author": "Yantimir",
   "license": "MIT",
+  "homepage": "https://yantimir.github.io/Posts-List-MUI-React",
   "scripts": {
     "editorconfig": "editorconfig-checker",
     "test": "npm run editorconfig",
