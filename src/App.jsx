@@ -24,6 +24,7 @@ import { Registration } from "./components/Registration/Registration";
 import { AuthorAvatar } from "./components/AuthorAvatar/AuthorAvatar";
 import Modal from "./components/Modal/Modal"
 import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm";
+import { AuthForm } from "./components/AuthForm/AuthForm";
 
 const theme = createTheme({
     palette: {
@@ -70,7 +71,7 @@ export const App = () => {
 
     const location = useLocation();
     const state = location.state;
-    console.log(state)
+
 
     useEffect(() => {
         setIsLoading(true);
@@ -204,7 +205,14 @@ export const App = () => {
             });
     }
     //регистрация
-    function handleSignupUser(dataUser) {
+    function handleSignUpUser(dataUser) {
+        api.signupUser(dataUser)
+            .then((newDataUser) => {
+                console.log(newDataUser)
+            });
+    }
+    //авторизация
+    function handleSignInUser(dataUser) {
         api.signupUser(dataUser)
             .then((newDataUser) => {
                 console.log(newDataUser)
@@ -228,7 +236,8 @@ export const App = () => {
                 handleSendEditPost,
                 handleSendNewComment,
                 handleDeleteComment,
-                handleSignupUser,
+                handleSignUpUser,
+                handleSignInUser,
             }}>
                 <CurrentPostsContext.Provider value={posts}>
                     <CurrentAllUsersContext.Provider value={allUsers}>
@@ -282,22 +291,17 @@ export const App = () => {
                                                     openModal={openModalAuth}
                                                     handleCloseModal={handleCloseModalAuth}
                                                 >
-                                                    {/* <RegistrationForm
+                                                    <AuthForm
                                                         titleForm="Авторизоваться"
-                                                        titleButton="Авторизоваться"
+                                                        titleButton="Войти"
                                                         handleCloseModal={handleCloseModalAuth}
-                                                    /> */}
-                                                    Авторизация
+                                                    />
+                                                    {/* Авторизация */}
                                                     <Box>
                                                         <Link
                                                             to="/register"
                                                             replace={true}
                                                             state={{ ...state, backgroundLocation: location }}>
-                                                            {/* <RegistrationForm
-                                                                titleForm="Зарегестрироваться"
-                                                                titleButton="Зарегестрироваться"
-                                                                handleCloseModal={handleCloseModalAuth}
-                                                            /> */}
                                                             Зарегестрироваться
                                                         </Link>
                                                     </Box>
@@ -316,13 +320,19 @@ export const App = () => {
                                                     openModal={openModalAuth}
                                                     handleCloseModal={handleCloseModalAuth}
                                                 >
-                                                    Регистрация
-                                                    <Link
-                                                        to="/login"
-                                                        replace={true}
-                                                        state={{ ...state, backgroundLocation: location }}>
-                                                        Войти
-                                                    </Link>
+                                                    <>
+                                                        <RegistrationForm
+                                                            titleForm="Зарегестрироваться"
+                                                            titleButton="Зарегестрироваться"
+                                                            handleCloseModal={handleCloseModalAuth}
+                                                        />
+                                                        <Link
+                                                            to="/login"
+                                                            replace={true}
+                                                            state={{ ...state, backgroundLocation: location }}>
+                                                            Войти
+                                                        </Link>
+                                                    </>
                                                 </Modal>
                                             } />
                                             <Route path="/forgot" element={

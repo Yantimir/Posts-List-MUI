@@ -3,16 +3,17 @@ import { useForm } from "react-hook-form";
 import { Box, Button, Typography, TextField } from "@mui/material";
 import { AppContext } from "../../context/appContext";
 
-export const RegistrationForm = ({ titleForm, titleButton, handleCloseModal }) => {
+export const AuthForm = ({ titleForm, titleButton, handleCloseModal }) => {
 
-    const { handleSignUpUser } = useContext(AppContext);
+    const { handleSignInUser } = useContext(AppContext);
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: "onBlur"
     });
 
-    function handleRegistrationFormSubmit(data) {
-        handleSignUpUser(data);
-        handleCloseModal();
+    function handleAuthFormSubmit(data) {
+        console.log(data)
+        // handleSignInUser(data);
+        // handleCloseModal();
     }
 
     return (
@@ -20,23 +21,10 @@ export const RegistrationForm = ({ titleForm, titleButton, handleCloseModal }) =
             component="form"
             noValidate
             autoComplete="off"
-            onSubmit={handleSubmit(handleRegistrationFormSubmit)}
+            onSubmit={handleSubmit(handleAuthFormSubmit)}
             sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "300px" }}
         >
             <Typography variant="h6" color="text.secondary">{titleForm}</Typography>
-            <TextField
-                {...register(
-                    "name",
-                    { required: "Это поле обязательно" }
-                )}
-                label="Введите имя"
-                variant="outlined"
-                sx={{ m: 1, width: "100%" }}
-                size="small"
-            />
-            <Box component="div">
-                {errors?.name && <Box color="red" sx={{ textAlign: "center", fontSize: "10px" }}>{errors?.name?.message}</Box>}
-            </Box>
             <TextField
                 {...register("email")}
                 label="Введите ваш email"

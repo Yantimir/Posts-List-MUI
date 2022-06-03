@@ -64,23 +64,13 @@ export const UserPost = ({ _id, likes, author, comments, text, title, image, tag
                     justifyContent: "center"
                 }}
             >
-                {/* <Paper elevation={1} sx={{ width: "20px" }}>
-                    <Box>
-                        <Box>
-                            <IconButton variant="contained" onClick={handleClickBack}>
-                                <ArrowBack />
-                            </IconButton>
-                        </Box>
-                        <Box>
-                            <IconButton variant="contained" onClick={handleClickBack}>
-                                <ArrowBack />
-                            </IconButton>
-                        </Box>
-                    </Box>
-                </Paper> */}
                 <Paper>
-
-                    <Box sx={{ flex: "1 0 auto", mb: "15px", p: "20px" }}>
+                    <Box sx={{ flex: "1 0 auto", p: "20px" }}>
+                        <Box sx={{ mb: "20px" }}>
+                            <IconButton variant="contained" onClick={handleClickBack}>
+                                <ArrowBack />
+                            </IconButton>
+                        </Box>
                         <Box component="div" sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box sx={{ display: "flex" }}>
                                 <Box sx={{ mr: "15px" }}>
@@ -189,6 +179,11 @@ export const UserPost = ({ _id, likes, author, comments, text, title, image, tag
                                 <CommentSend id={_id} />
                             </Box>
                         }
+                        <Box sx={{ mt: "20px" }}>
+                            <IconButton variant="contained" onClick={handleClickBack}>
+                                <ArrowBack />
+                            </IconButton>
+                        </Box>
                     </Box >
                 </Paper>
             </Box >

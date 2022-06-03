@@ -157,7 +157,15 @@ class Api {
         }).then(onResponse)
             .catch(onError)
     }
-    // POST https://api.react-learning.ru/signin // авторизация
+    // авторизация
+    signinUser(dataUser) {
+        return fetch(`${this._baseUrl}/signin`, {
+            method: "POST",
+            headers: this.headers,
+            body: JSON.stringify(dataUser),
+        }).then(onResponse)
+            .catch(onError)
+    }
     // POST https://api.react-learning.ru/password-reset // сброс пароля на почту
     // POST https://api.react-learning.ru/password-reset/:userId/:token // смена пароля после подтвержения токеном
 
